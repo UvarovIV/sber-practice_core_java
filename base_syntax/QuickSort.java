@@ -5,7 +5,7 @@ public class QuickSort {
 
         int left = begin;
         int right = end;
-        int middle_el = arr[begin + (end - begin) / 2];
+        int middle_el = arr[(begin + end) / 2];
 
         if (arr.length == 0)
             return;
