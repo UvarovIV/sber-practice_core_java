@@ -51,7 +51,7 @@ public class PizzaOrder {
             sauceAvailability = "без соуса";
         }
 
-        System.out.println("Заказ принят. " + pizzaSize + " пицца <<" + title + ">> " + sauceAvailability + " на адрес " + adress);
+        System.out.println(String.format("Заказ принят. %s пицца <<%s>> %s на адрес %s", pizzaSize, title, sauceAvailability, adress));
     }
 
     public void cancel(){
