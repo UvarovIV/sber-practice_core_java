@@ -37,7 +37,7 @@ public class Author {
 
     @Override
     public String toString(){
-        return "Author (Автор: " + name + ", Пол: " + gender + ", Email: " + email + ")";
+        return String.format("Автор: %s, Пол: %s, Email: %s", name, gender, email);
     }
 
 }

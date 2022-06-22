@@ -1,8 +1,10 @@
 package OOP_part1.Task5;
 
+import OOP_part1.Task5.PizzaOrder.Size;
+
 public class TestPizzaOrder {
     public static void main(String[] args) {
-        PizzaOrder pizzaOrder = new PizzaOrder("Аль-Капчоне", "Small", false, "Ленинградская 75");
+        PizzaOrder pizzaOrder = new PizzaOrder("Аль-Капчоне", Size.BIG, false, "Ленинградская 75");
         pizzaOrder.cancel();
         pizzaOrder.order();
         pizzaOrder.cancel();
@@ -11,7 +13,7 @@ public class TestPizzaOrder {
 
         pizzaOrder.setAdress("Ленинградская 15");
         pizzaOrder.setSauce(true);
-        pizzaOrder.setSize("Big");
+        pizzaOrder.setSize(Size.SMALL);
         pizzaOrder.setTitle("Чикибамбони");
         
         System.out.println(pizzaOrder.getAdress());

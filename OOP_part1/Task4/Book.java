@@ -37,6 +37,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book (Автор: " + author.getName() + ", Название: " + title + ", Год: " + year + ")";
+        return String.format("Автор: %s, Название: %s, Год: %s", author.getName(), title, year);
     }
 }

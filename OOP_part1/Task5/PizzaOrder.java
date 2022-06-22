@@ -2,7 +2,7 @@ package OOP_part1.Task5;
 
 public class PizzaOrder {
     private String title;
-    private enum Size {
+    public enum Size {
         SMALL,
         MEDIUM,
         BIG
@@ -12,14 +12,14 @@ public class PizzaOrder {
     private String adress;
     private boolean orderAccepted = false;
 
-    public PizzaOrder(String title, String size, boolean sauce, String adress){
+    public PizzaOrder(String title, Size size, boolean sauce, String adress){
         this.title = title;
         
-        if (size.equals("Small")){
+        if (size == Size.SMALL){
             this.size = Size.SMALL;
-        } else if (size.equals("Medium")){
+        } else if (size == Size.MEDIUM){
             this.size = Size.MEDIUM;
-        } else {
+        } else if (size == Size.BIG) {
             this.size = Size.BIG;
         }
 
@@ -83,12 +83,12 @@ public class PizzaOrder {
         this.title = title;
     }
 
-    public void setSize(String size) {
-        if (size.equals("Small")){
+    public void setSize(Size size) {
+        if (size == Size.SMALL){
             this.size = Size.SMALL;
-        } else if (size.equals("Medium")){
+        } else if (size == Size.MEDIUM){
             this.size = Size.MEDIUM;
-        } else {
+        } else if (size == Size.BIG) {
             this.size = Size.BIG;
         }
     }
@@ -103,6 +103,6 @@ public class PizzaOrder {
 
     @Override
     public String toString() {
-        return "PizzaOrder (Название пиццы: " + title + ", Размер пиццы: " + size + ", Соус заказан: " + sauce + ", Заказ принят: " + orderAccepted + ", Адрес: " + adress + ")";
+        return String.format("Название пиццы: %s, Размер пиццы: %s, Соус заказан: %s, Заказ принят: %s, Адрес: %s", title, size, sauce, orderAccepted, adress);
     }
 }

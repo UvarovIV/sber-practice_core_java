@@ -18,6 +18,6 @@ public class Circle {
     }
 
     public String toString(){
-        return "Circle(Радиус: " + radius + ", Цвет: " + color + ", Площадь: " + area() + ", Периметр: " + perimeter() + ")";
+        return String.format("Радиус: %s, Цвет: %s, Площадь: %s, Периметр: %s", radius, color, area(), perimeter());
     }
 }
