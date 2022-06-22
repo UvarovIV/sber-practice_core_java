@@ -3,9 +3,6 @@ package Exceptions;
 import java.io.*;
 
 public class BankOnline {
-    
-    private String cardNumber;
-    private Double money;
 
     private static boolean isNumeric(String cardNumber){
         try {
@@ -17,7 +14,7 @@ public class BankOnline {
     }
 
     private static boolean isBlocked(String cardNumber){
-        try (BufferedReader reader = new BufferedReader(new FileReader("BlockedCards.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Exceptions\\BlockedCards.txt"))) {
             String blockedCard = reader.readLine();
             while (blockedCard != null){
                 blockedCard = blockedCard.replaceAll("\\s+", "");
@@ -33,25 +30,29 @@ public class BankOnline {
 
     public void send(String cardNumber, Double money){
         try {
-            cardNumber = cardNumber.replaceAll("\\s+", "");
             if (cardNumber == null || money == null){
                 throw new NullArgumentException("Номер карты или сумма перевода не введены");
             } 
+            
+            cardNumber = cardNumber.replaceAll("\\s+", "");
+
             if (!isNumeric(cardNumber) || cardNumber.length() != 16){
-                throw new InvalidCardNumberException("Неправильно указан номер карты")
+                throw new InvalidCardNumberException("Неправильно указан номер карты");
             }
+
             if (money > 50000){
                 throw new OutOfLimitTransferException("Превышен лимит перевода");
             }
+
             if (money < 0) {
                 throw new NegativeAmountTransferException("Сумма перевода не может быть отрицательным числом");
             }
+
             if (isBlocked(cardNumber)){
                 throw new BlockedCardTransferException("Перевод не возможен так как карта заблокирована");
             }
 
-            this.cardNumber = cardNumber;
-            this.money = money;
+            System.out.println(String.format("Перевод суммой %s был успешно выполнен на счёт %s", money, cardNumber));
 
         } catch (NullArgumentException eNullArgEx) {
             System.out.println(eNullArgEx.getMessage());
@@ -63,8 +64,6 @@ public class BankOnline {
             System.out.println(eNegativeAmountTransferEx.getMessage());
         } catch (BlockedCardTransferException eBlockedCardTransferEx){
             System.out.println(eBlockedCardTransferEx.getMessage());
-        } finally {
-            System.out.println(String.format("Перевод суммой %s был успешно выполнен на счёт %s", money, cardNumber));
         }
     }
 
