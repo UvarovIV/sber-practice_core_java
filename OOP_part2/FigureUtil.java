@@ -2,9 +2,7 @@ package OOP_part2;
 
 public class FigureUtil {
 
-    private FigureUtil(){
-
-    }
+    private FigureUtil(){}
 
     public static double area(Figure figure){
         return figure.area();
