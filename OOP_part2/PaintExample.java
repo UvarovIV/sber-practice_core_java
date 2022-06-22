@@ -24,7 +24,7 @@ public class PaintExample {
         circle.draw();
         circle.draw(Color.PINK);
 
-        Triangle triangle = new Triangle(point, 10, 5, 10);
+        Triangle triangle = new Triangle(point, 10, 4, 10);
         System.out.println(triangle.area());
         System.out.println(triangle.perimeter());
         triangle.draw();
