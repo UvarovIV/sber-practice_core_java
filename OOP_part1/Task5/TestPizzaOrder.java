@@ -17,9 +17,9 @@ public class TestPizzaOrder {
         pizzaOrder.setTitle("Чикибамбони");
         
         System.out.println(pizzaOrder.getAdress());
+        System.out.println(pizzaOrder.isSauce());
         System.out.println(pizzaOrder.getTitle());
         System.out.println(pizzaOrder.getSize());
-        System.out.println(pizzaOrder.isSauce());
         System.out.println(pizzaOrder);
     }
 }

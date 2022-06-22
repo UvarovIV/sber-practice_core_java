@@ -21,9 +21,6 @@ public class TestAutorAndBook {
         author.setGender('m');
         author.setEmail("hs@gmail.com");
 
-        System.out.println(author.getName());
-        System.out.println(author.getGender());
-        System.out.println(author.getEmail());
         System.out.println(author);
 
         Author author2 = new Author("Thomas Kormen", 'm', "tk@gmail.com");
@@ -32,9 +29,6 @@ public class TestAutorAndBook {
         book.setAuthor(author2);
         book.setYear(2012);
 
-        System.out.println(book.getTitle());
-        System.out.println(book.getAuthor());
-        System.out.println(book.getYear());
         System.out.println(book);
 
     }
