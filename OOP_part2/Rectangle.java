@@ -17,10 +17,12 @@ public class Rectangle extends Figure {
         return "Rectangle";
     }
 
+    @Override
     public double area(){
         return (width * height);
     }
 
+    @Override
     public double perimeter(){
         return (width + height) * 2; 
     }

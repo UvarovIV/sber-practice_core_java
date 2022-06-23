@@ -13,11 +13,13 @@ public class Triangle extends Figure {
         this.side3 = side3;
     }
 
+    @Override
     public double area(){
         double p = perimeter() / 2;
         return Math.sqrt(p * (p-side1) * (p-side2) * (p-side3));
     }
 
+    @Override
     public double perimeter(){
         return (side1 + side2 + side3); 
     }
