@@ -17,7 +17,7 @@ public class BankOnline {
         try (BufferedReader reader = new BufferedReader(new FileReader("Exceptions\\BlockedCards.txt"))) {
             String blockedCard = reader.readLine();
             while (blockedCard != null){
-                blockedCard = blockedCard.replaceAll("\\s+", "");
+                blockedCard = blockedCard.replaceAll("\s+", "");
                 if (cardNumber.equals(blockedCard))
                     return true;
                 blockedCard = reader.readLine();
