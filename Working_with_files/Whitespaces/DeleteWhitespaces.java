@@ -1,4 +1,4 @@
-package Working_with_files;
+package Working_with_files.Whitespaces;
 
 import java.io.*;
 
