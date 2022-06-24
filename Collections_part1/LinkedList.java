@@ -97,7 +97,6 @@ public class LinkedList implements List, Deque{
             }
             obj = obj.next;
         }
-        
         return false;
     }
 
