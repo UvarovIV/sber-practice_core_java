@@ -17,10 +17,4 @@ public class Node {
         item = null;
         next = null;
     }
-
-    public void setNode(Node prev, Object item, Node next) {
-        this.prev = prev;
-        this.item = item;
-        this.next = next;
-    }
 }
