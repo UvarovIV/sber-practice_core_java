@@ -37,5 +37,16 @@ public class TestLinkedList {
         for (int i = 0; i < ll.size(); i++) {
             System.out.println(ll.get(i));
         }
+
+        System.out.println(ll.contains(9));
+        System.out.println(ll.contains(3));
+        System.out.println(ll.contains(5));
+        System.out.println(ll.contains(7));
+        System.out.println(ll.contains(0));
+
+        System.out.println(ll.isEmpty());
+        ll.clear();
+        System.out.println(ll.isEmpty());
+        System.out.println(ll.size());
     }
 }

@@ -15,13 +15,29 @@ public class LinkedList implements List, Deque{
         size = 0;
     }
 
+    private void deleteElement(Node node){    
+        if (node.prev != null && node.next != null){
+            node.next.prev = node.prev; 
+            node.prev.next = node.next;
+        } else if (node.prev == null){
+            begin.next = node.next;
+            node.next.prev = null;
+        } else if (node.next == null) {
+            end.prev = node.prev;
+            node.prev.next = null;
+        }
+        size--;
+    }
+
     @Override
     public void add(int index, Object item) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public Object get(int index) {
+    public Object get (int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
         Node obj = begin.next;
         int i = 0;
         while(i < index){
@@ -33,8 +49,15 @@ public class LinkedList implements List, Deque{
 
     @Override
     public int indexOf(Object item) {
-        // TODO Auto-generated method stub
-        return 0;
+        Node obj = begin.next;
+        int i = 0;
+        while (i < size){
+            if (obj.item == item)
+                return i;
+            obj = obj.next;
+            i++;
+        }
+        return -1;
     }
 
     @Override
@@ -63,19 +86,28 @@ public class LinkedList implements List, Deque{
 
     @Override
     public boolean add(Object item) {
-        // TODO Auto-generated method stub
-        return false;
+        addLast(item);
+        return true;
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
+        Node buff = begin.next;
+        while (buff.next != null) {
+            deleteElement(buff);
+            buff = buff.next;
+        }
         
     }
 
     @Override
     public boolean contains(Object item) {
-        // TODO Auto-generated method stub
+        Node buff = begin.next;
+        while (buff != null){
+            if (buff.item == item)
+                return true;
+            buff = buff.next;
+        }
         return false;
     }
 
@@ -89,14 +121,6 @@ public class LinkedList implements List, Deque{
 
     @Override
     public boolean remove(Object item) {
-        Node obj = begin.next;
-        for (int i = 0; i < size; i++) {
-            if (obj.item == item){
-                //obj.prev.next = obj.next;
-                size--;
-            }
-            obj = obj.next;
-        }
         return false;
     }
 
@@ -153,6 +177,7 @@ public class LinkedList implements List, Deque{
         if (size == 0)
             return null;
         Object el = begin.next.item;
+        begin.next.next.prev = begin;
         begin.next = begin.next.next;
         size--;
         return el;
@@ -163,6 +188,7 @@ public class LinkedList implements List, Deque{
         if (size == 0)
             return null;
         Object el = end.prev.item;
+        end.prev.prev.next = end;
         end.prev = end.prev.prev;
         size--;
         return el;
@@ -173,6 +199,7 @@ public class LinkedList implements List, Deque{
         if (size == 0)
             throw new NoSuchElementException();
         Object el = begin.next.item;
+        begin.next.next.prev = begin;
         begin.next = begin.next.next;
         size--;
         return el;
@@ -183,6 +210,7 @@ public class LinkedList implements List, Deque{
         if (size == 0)
             throw new NoSuchElementException();
         Object el = end.prev.item;
+        end.prev.prev.next = end;
         end.prev = end.prev.prev;
         size--;
         return el;
