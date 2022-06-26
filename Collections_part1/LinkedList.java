@@ -15,18 +15,23 @@ public class LinkedList implements List, Deque{
         size = 0;
     }
 
-    private void deleteElement(Node node){    
+    private Object deleteElement(Node node){    
+        Object result = null;
         if (node.prev != null && node.next != null){
+            result = node.item;
             node.next.prev = node.prev; 
             node.prev.next = node.next;
         } else if (node.prev == null){
+            result = node.item;
             begin.next = node.next;
             node.next.prev = null;
         } else if (node.next == null) {
+            result = node.item;
             end.prev = node.prev;
             node.prev.next = null;
         }
         size--;
+        return result;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class LinkedList implements List, Deque{
 
     @Override
     public Object get (int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index > size)
+        if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
         Node obj = begin.next;
         int i = 0;
@@ -62,14 +67,29 @@ public class LinkedList implements List, Deque{
 
     @Override
     public int lastIndexOf(Object item) {
-        // TODO Auto-generated method stub
-        return 0;
+        Node obj = end.prev;
+        int i = size - 1;
+        while (i >= 0){
+            if (obj.item == item)
+                return i;
+            obj = obj.prev;
+            i--;
+        }
+        return -1;
     }
 
     @Override
-    public Object remove(int index) {
-        // TODO Auto-generated method stub
-        return null;
+    public Object remove(int index) throws NoSuchElementException {
+        if (index < 0 || index >= size) {
+            throw new NoSuchElementException();
+        } else {
+            Object result = null;
+            Node obj = begin.next;
+            for (int i = 0; i < index; i++)
+                obj = obj.next;
+            result = deleteElement(obj);
+            return result;
+        }
     }
 
     @Override
@@ -92,21 +112,21 @@ public class LinkedList implements List, Deque{
 
     @Override
     public void clear() {
-        Node buff = begin.next;
-        while (buff.next != null) {
-            deleteElement(buff);
-            buff = buff.next;
+        Node obj = begin.next;
+        while (obj.next != null) {
+            deleteElement(obj);
+            obj = obj.next;
         }
         
     }
 
     @Override
     public boolean contains(Object item) {
-        Node buff = begin.next;
-        while (buff != null){
-            if (buff.item == item)
+        Node obj = begin.next;
+        while (obj != null){
+            if (obj.item == item)
                 return true;
-            buff = buff.next;
+            obj = obj.next;
         }
         return false;
     }
@@ -121,7 +141,16 @@ public class LinkedList implements List, Deque{
 
     @Override
     public boolean remove(Object item) {
-        return false;
+        boolean isDelete = false;
+        Node obj = begin.next;
+        while (obj.next != null) {
+            if (obj.item == item) {
+                deleteElement(obj);
+                isDelete = true;
+            }
+            obj = obj.next;
+        }
+        return isDelete;
     }
 
     @Override
@@ -132,13 +161,13 @@ public class LinkedList implements List, Deque{
     @Override
     public void addFirst(Object item) {
         if (begin.next.equals(end)){
-            Node el = new Node(begin, item, end);
-            begin.next = el;
-            end.prev = el;
+            Node obj = new Node(begin, item, end);
+            begin.next = obj;
+            end.prev = obj;
         } else{
-            Node el = new Node(null, item, begin.next);
-            begin.next.prev = el;
-            begin.next = el; 
+            Node obj = new Node(null, item, begin.next);
+            begin.next.prev = obj;
+            begin.next = obj; 
         }
         size++;
     }
@@ -146,13 +175,13 @@ public class LinkedList implements List, Deque{
     @Override
     public void addLast(Object item) {
         if (end.prev.equals(begin)){
-            Node el = new Node(begin, item, end);
-            begin.next = el;
-            end.prev = el;
+            Node obj = new Node(begin, item, end);
+            begin.next = obj;
+            end.prev = obj;
         } else {
-            Node el = new Node(end.prev, item, null);
-            end.prev.next = el;
-            end.prev = el; 
+            Node obj = new Node(end.prev, item, null);
+            end.prev.next = obj;
+            end.prev = obj; 
         }
         size++;
     }
@@ -176,43 +205,43 @@ public class LinkedList implements List, Deque{
     public Object pollFirst() {
         if (size == 0)
             return null;
-        Object el = begin.next.item;
+        Object obj = begin.next.item;
         begin.next.next.prev = begin;
         begin.next = begin.next.next;
         size--;
-        return el;
+        return obj;
     }
 
     @Override
     public Object pollLast() {
         if (size == 0)
             return null;
-        Object el = end.prev.item;
+        Object obj = end.prev.item;
         end.prev.prev.next = end;
         end.prev = end.prev.prev;
         size--;
-        return el;
+        return obj;
     }
 
     @Override
     public Object removeFirst() {
         if (size == 0)
             throw new NoSuchElementException();
-        Object el = begin.next.item;
+        Object obj = begin.next.item;
         begin.next.next.prev = begin;
         begin.next = begin.next.next;
         size--;
-        return el;
+        return obj;
     }
 
     @Override
     public Object removeLast() {
         if (size == 0)
             throw new NoSuchElementException();
-        Object el = end.prev.item;
+        Object obj = end.prev.item;
         end.prev.prev.next = end;
         end.prev = end.prev.prev;
         size--;
-        return el;
+        return obj;
     }
 }
