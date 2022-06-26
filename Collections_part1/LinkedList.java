@@ -35,8 +35,22 @@ public class LinkedList implements List, Deque{
     }
 
     @Override
-    public void add(int index, Object item) {
-        // TODO Auto-generated method stub
+    public void add(int index, Object item) throws NoSuchElementException {
+        if (index < 0 || index > size) {
+            throw new NoSuchElementException();
+        } else if (index == size) {
+            addLast(item);
+        } else if (index == 0) {
+            addFirst(item);
+        } else {
+            Node obj = begin.next;
+            for (int i = 0; i < index; i++)
+                obj = obj.next;
+            Node add = new Node(obj.prev, item, obj);
+            obj.prev.next = add;
+            obj.prev = add;
+            size++;
+        }
     }
 
     @Override
@@ -93,15 +107,31 @@ public class LinkedList implements List, Deque{
     }
 
     @Override
-    public void set(int index, Object item) {
-        // TODO Auto-generated method stub
-        
+    public void set(int index, Object item) throws NoSuchElementException {
+        if (index < 0 || index > size) {
+            throw new NoSuchElementException();
+        } else if (index == size) {
+            addLast(item);
+        } else {
+            Node obj = begin.next;
+            for (int i = 0; i < index; i++)
+                obj = obj.next;
+            obj.item = item;
+        }
     }
 
     @Override
-    public List subList(int from, int to) {
-        // TODO Auto-generated method stub
-        return null;
+    public LinkedList subList(int from, int to) throws IndexOutOfBoundsException {
+        if (from < 0 || to < 0 || to > size || from > to)
+            throw new IndexOutOfBoundsException();
+        LinkedList linkedList = new LinkedList();
+        Node obj = begin.next;
+        for (int i = 0; i < to; i++) {
+            if (i >= from)
+                linkedList.addLast(obj.item);
+            obj = obj.next;
+        }
+        return linkedList;
     }
 
     @Override
@@ -117,7 +147,6 @@ public class LinkedList implements List, Deque{
             deleteElement(obj);
             obj = obj.next;
         }
-        
     }
 
     @Override
@@ -243,5 +272,10 @@ public class LinkedList implements List, Deque{
         end.prev = end.prev.prev;
         size--;
         return obj;
+    }
+
+    @Override
+    public Iterator<Object> iterator() {
+        return new LinkedListIterator(this);
     }
 }
