@@ -27,9 +27,9 @@ public class ArrayList implements List {
         if (size == capacity) 
             arrayList = increaseCapacity();
 
-        if (index < 0 || index > size) {
+        if (index < 0 || index > size)
             throw new IndexOutOfBoundsException();
-        } else if (index == size) {
+        else if (index == size) {
             arrayList[index] = item;
             size++;
         } else {
@@ -131,16 +131,13 @@ public class ArrayList implements List {
 
     @Override
     public boolean remove(Object item) {
-        if (size == 0)
-            return false;
         int sizeCopy = size;
         for (int i = 0; i < size; i++)
             if (arrayList[i].equals(item)) {
                 remove(i);
-                remove(item);
-                break;
+                i--;
             }
-        return !(sizeCopy == size);
+        return !(size == sizeCopy);
     }
 
     @Override

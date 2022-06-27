@@ -1,10 +1,13 @@
 package Collections_part1;
 
+import java.util.NoSuchElementException;
+
 public class TestLinkedList {
     public static void main(String[] args) {
 
         LinkedList ll = new LinkedList();
 
+        try{
         ll.addLast(3);
         ll.addLast(1);
         ll.addLast(1);
@@ -49,12 +52,12 @@ public class TestLinkedList {
         for (var item : ll) 
             System.out.print(item + " ");
 
-        System.out.println("\nTest set");
+        System.out.println("\n\nTest set");
         ll.set(0, 1);
         for (var item : ll) 
             System.out.print(item + " ");
 
-        System.out.println("\nLinked list contains 9: " + ll.contains(9));
+        System.out.println("\n\nLinked list contains 9: " + ll.contains(9));
         System.out.println("Linked list contains 3: " + ll.contains(3));
         System.out.println("Linked list contains 1: " + ll.contains(1));
         System.out.println("Linked list contains 0: " + ll.contains(0));
@@ -63,6 +66,11 @@ public class TestLinkedList {
         ll.clear();
         System.out.println("Linked list is empty: " + ll.isEmpty());
         
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } catch (NoSuchElementException ex) {
+            ex.printStackTrace();
+        }
 
     }
 }

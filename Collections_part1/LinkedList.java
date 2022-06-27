@@ -35,9 +35,9 @@ public class LinkedList implements List, Deque{
     }
 
     @Override
-    public void add(int index, Object item) throws NoSuchElementException {
+    public void add(int index, Object item) throws IndexOutOfBoundsException {
         if (index < 0 || index > size) {
-            throw new NoSuchElementException();
+            throw new IndexOutOfBoundsException();
         } else if (index == size) {
             addLast(item);
         } else if (index == 0) {
@@ -93,9 +93,9 @@ public class LinkedList implements List, Deque{
     }
 
     @Override
-    public Object remove(int index) throws NoSuchElementException {
+    public Object remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) {
-            throw new NoSuchElementException();
+            throw new IndexOutOfBoundsException();
         } else {
             Object result = null;
             Node obj = begin.next;
@@ -107,9 +107,9 @@ public class LinkedList implements List, Deque{
     }
 
     @Override
-    public void set(int index, Object item) throws NoSuchElementException {
+    public void set(int index, Object item) throws IndexOutOfBoundsException {
         if (index < 0 || index > size) {
-            throw new NoSuchElementException();
+            throw new IndexOutOfBoundsException();
         } else if (index == size) {
             addLast(item);
         } else {
