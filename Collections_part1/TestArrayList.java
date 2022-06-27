@@ -3,9 +3,7 @@ package Collections_part1;
 public class TestArrayList {
     public static void main(String[] args) {
 
-        ArrayList ll = new ArrayList();
-
-        
+    ArrayList ll = new ArrayList();
 
     try {
         ll.add(0);
