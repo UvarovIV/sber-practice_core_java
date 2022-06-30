@@ -31,7 +31,7 @@ public class ArrayList<E> implements List<E> {
         capacity = (capacity * 3) / 2 + 1;
         Object[] newArrayList = new Object[capacity];
         for (int i = 0; i < size; i++) 
-            newArrayList[i] = arrayList[i];
+           newArrayList[i] = arrayList[i];
         return newArrayList;
     }
 

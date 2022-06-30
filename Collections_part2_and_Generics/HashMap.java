@@ -17,7 +17,7 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     private K getKey(LinkedList<Entry<K, V>> linkedList, int i) {
-        return ((Entry<K, V>) linkedList.get(i)).getKey();
+       return ((Entry<K, V>) linkedList.get(i)).getKey();
     }
 
     private V getValue(LinkedList<Entry<K, V>> linkedList, int i) {
