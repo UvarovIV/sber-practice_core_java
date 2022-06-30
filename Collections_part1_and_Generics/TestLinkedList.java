@@ -1,11 +1,11 @@
-package Collections_part1;
+package Collections_part1_and_Generics;
 
 import java.util.NoSuchElementException;
 
 public class TestLinkedList {
     public static void main(String[] args) {
 
-        LinkedList ll = new LinkedList();
+        LinkedList<Integer> ll = new LinkedList<>();
 
         try{
         ll.addLast(3);
@@ -23,7 +23,7 @@ public class TestLinkedList {
         for (var item : ll) 
             System.out.print(item + " ");
 
-        LinkedList sublist = ll.subList(3, 6); 
+        LinkedList<Integer> sublist = ll.subList(3, 6); 
 
         System.out.println("\n\nTest sublist from 3 to 6");
         for (var item : sublist) 
@@ -46,7 +46,7 @@ public class TestLinkedList {
         System.out.println("First Element deleted: " + ll.removeFirst());
         System.out.println("Last Element deleted: " + ll.removeLast());
         System.out.println("Remove element with index 4: " + ll.remove(4));
-        System.out.println("Remove element 1: " + ll.remove((Object) 1 ));
+        System.out.println("Remove element 1: " + ll.remove((Integer) 1 ));
         
         System.out.println("\nAfter removing elements");
         for (var item : ll) 

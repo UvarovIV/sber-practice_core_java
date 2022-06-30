@@ -1,9 +1,9 @@
-package Collections_part1;
+package Collections_part1_and_Generics;
 
 public class TestArrayList {
     public static void main(String[] args) {
 
-    ArrayList ll = new ArrayList();
+    ArrayList<Integer> ll = new ArrayList<>();
 
     try {
         ll.add(0);
@@ -22,7 +22,7 @@ public class TestArrayList {
         for (var item : ll) 
             System.out.print(item + " ");
 
-        ArrayList sublist = ll.subList(3, 6); 
+        ArrayList<Integer> sublist = ll.subList(3, 6); 
 
         System.out.println("\n\nTest sublist from 3 to 6");
         for (var item : sublist) 
@@ -37,7 +37,7 @@ public class TestArrayList {
 
         System.out.println("\nTest remove");
         System.out.println("Remove element with index 4: " + ll.remove(4));
-        System.out.println("Remove element 15: " + ll.remove((Object) 15));
+        System.out.println("Remove element 15: " + ll.remove((Integer)15));
         
         System.out.println("\nAfter removing elements");
         for (var item : ll) 

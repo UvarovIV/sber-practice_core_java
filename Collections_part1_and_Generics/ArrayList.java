@@ -1,8 +1,7 @@
-package Collections_part1;
-
+package Collections_part1_and_Generics;
 import java.util.Iterator;
 
-public class ArrayList implements List {
+public class ArrayList<E> implements List<E> {
 
     private Object[] arrayList;
     private int capacity;
@@ -14,6 +13,20 @@ public class ArrayList implements List {
         size = 0;
     }
 
+    public ArrayList(ArrayList<E> aList) {
+        arrayList = aList.getObj();
+        capacity = aList.getCapacity();
+        size = aList.size();
+    }
+
+    private Object[] getObj() {
+        return arrayList;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
     private Object[] increaseCapacity() {
         capacity = (capacity * 3) / 2 + 1;
         Object[] newArrayList = new Object[capacity];
@@ -23,7 +36,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void add(int index, Object item) throws IndexOutOfBoundsException {
+    public void add(int index, E item) {
         if (size == capacity) 
             arrayList = increaseCapacity();
 
@@ -41,14 +54,14 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Object get(int index) throws IndexOutOfBoundsException {
+    public E get(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) 
             throw new IndexOutOfBoundsException(); 
-        return arrayList[index];
+        return (E) arrayList[index];
     }
 
     @Override
-    public int indexOf(Object item) {
+    public int indexOf(E item) {
         for (int i = 0; i < size; i++) 
             if (arrayList[i].equals(item))
                 return i;
@@ -56,7 +69,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public int lastIndexOf(Object item) {
+    public int lastIndexOf(E item) {
         for (int i = size - 1; i >= 0; i--) 
             if (arrayList[i].equals(item))
                 return i;
@@ -64,10 +77,10 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Object remove(int index) throws IndexOutOfBoundsException {
+    public E remove(int index) {
         if (index < 0 || index >= size) 
             throw new IndexOutOfBoundsException();
-        Object el = arrayList[index];
+        E el = (E) arrayList[index];
         for (int i = index; i < size; i++) 
             arrayList[i] = arrayList[i + 1];
         size--;
@@ -75,7 +88,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void set(int index, Object item) throws IndexOutOfBoundsException {
+    public void set(int index, E item) {
         if (index < 0 || index > size)
             throw new IndexOutOfBoundsException();
         else if (index == size)
@@ -85,17 +98,17 @@ public class ArrayList implements List {
     }
 
     @Override
-    public ArrayList subList(int from, int to) throws IndexOutOfBoundsException {
+    public ArrayList<E> subList(int from, int to) {
         if (from < 0 || to < 0 || to > size || from > to)
             throw new IndexOutOfBoundsException();
-        ArrayList subArrayList = new ArrayList();
+        ArrayList<E> subArrayList = new ArrayList<>();
         for (int i = from; i < to; i++) 
-            subArrayList.add(arrayList[i]);
+            subArrayList.add((E) arrayList[i]);
         return subArrayList;
     }
 
     @Override
-    public boolean add(Object item) {
+    public boolean add(E item) {
         if (size < capacity)
             arrayList[size] = item;
         else {
@@ -115,7 +128,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public boolean contains(Object item) {
+    public boolean contains(E item) {
         for (Object obj : arrayList) 
             if (item.equals(obj)) 
                 return true;
@@ -124,13 +137,11 @@ public class ArrayList implements List {
 
     @Override
     public boolean isEmpty() {
-        if (size == 0)
-            return true;
-        return false;
+        return size == 0;
     }
 
     @Override
-    public boolean remove(Object item) {
+    public boolean remove(E item) {
         int sizeCopy = size;
         for (int i = 0; i < size; i++)
             if (arrayList[i].equals(item)) {
@@ -146,8 +157,8 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Iterator<Object> iterator() {
-        return new ArrayListIterator(this);
+    public Iterator<E> iterator() {
+        return new ListIterator<>(this);
     }
 
 }
